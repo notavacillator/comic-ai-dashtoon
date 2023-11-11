@@ -13,10 +13,19 @@ function App() {
   const [isTextEnabled, setIsTextEnabled] = useState(false);
   const [textValue, setTextValue] = useState('');
   const [isLoading,  setIsLoading] = useState(false);
+  const [bubbleArray, setBubbleArray]= useState(Array.from({ length: 10 }));
+
+  const [showScrollButton, setShowScrollButton] = useState(false);
 
   const handleQuery = async () => {
     setIsLoading(true); // Set isLoading to true while fetching
     try{
+      // Check if the textarea is empty 
+      if(inputText === ''){
+        alert('Please enter some input. ')
+        return;
+      }
+      
       // First as soon as someone submits the prompt 
       // the previous image for that page should be removed. 
       setImageArray((prevImages) => {
@@ -45,21 +54,55 @@ function App() {
     }
   };
 
+  
+  const handleText = () => {
+    // This sets the array value as per the text for 
+    // the corresponding page
+    setBubbleArray((prevText) => {
+      const newText = [...prevText];
+      newText[currentPage - 1] = textValue;
+      return newText;
+    });
+
+    setTextValue('');
+  }
   useEffect(() => {
 
     console.log(imageArray);
+    console.log(bubbleArray);
+
     return () => {
-
+      // cleanup 
     }
-  }, [imageArray])
+  }, [imageArray, bubbleArray])
 
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show the scroll-to-top button when scrolling down, hide it when at the top
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      setShowScrollButton(scrollY > 100);
+    };
 
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+  
   // console.log(imageArray);
   const filteredImages = imageArray.filter((image) => image !== undefined);
 
   return (
     <>
-        <div className='w-[90%] min-h-screen mx-auto flex justify-between py-3'>
+        <div className='lg:mx-9 min-h-screen mx-auto flex flex-wrap md:flex-nowrap items-center  justify-center py-3'>
           
           {/* for Pagination */}
           <div className='container'>
@@ -70,14 +113,15 @@ function App() {
               onPageChange={(page) => setCurrentPage(page)}
               imageArray={imageArray}
               isLoading = {isLoading}
+              bubbleArray={bubbleArray}
             />
 
           </div>
 
           {/* Modern Design Search Input  */}
-
-          <div className="relative  basis-1/3 flex flex-col justify-center">
+          <div className="relative basis-10/12 lg:basis-2/3 xl:basis-6/12 flex flex-col ">
             <textarea
+              required={true}
               value={inputText}
               placeholder='Enter the prompt to generate image for the page ...  '
               className="block w-11/12 h-[10rem] p-2  m-2 text-sm text-gray-900 border-2 
@@ -133,6 +177,7 @@ function App() {
                 className='mt-3 text-white w-32 bg-blue-700 hover:bg-blue-800 
                 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm 
                 px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'
+                onClick={handleText}
               >Enter Text
               </button>
             </div>
@@ -142,16 +187,23 @@ function App() {
         </div >
 
         {/* preview comic section  */}
-        <div className={`w-10/12 mx-auto ${submitBtn ? 'mt-40' : ''}`}>
+        <div className={`mx-auto flex flex-col justify-center items-center ${submitBtn ? 'my-40' : ''}`}>
           {
             submitBtn ?
               filteredImages.map((imageSrc, index) => (
-                <img key={index} src={imageSrc} alt={`Fetched ${index + 1}`}  className='border mt-4 h-[50rem] w-[50rem]'/>
+                <img key={index} src={imageSrc} alt={`Fetched ${index + 1}`}  className='block border-[0.1rem] rounded my-2 max-h-[50rem] max-w-[50rem] md:w-[80%] md:h-[80%]'/>
               ))
               :
               null
           }
         </div>
+
+        {/* scroll to top button */}
+        {showScrollButton && (
+        <button className="scroll-to-top" onClick={handleScrollToTop}>
+          &#9650;
+        </button>
+      )}
     </>
 
   );
