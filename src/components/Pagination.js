@@ -26,8 +26,8 @@ const Pagination = ({ currentPage, total, limit, onPageChange, imageArray, isLoa
     const pagesCount = Math.ceil(total / limit);
     const pages = range(1, pagesCount);
     return (
-        <div className=" border-4 border-blue-900 flex flex-col justify-center items-center">
-            <div className="border-4 border-green-400 rounded-md">
+        <div className=" flex flex-col justify-center items-center mt-4">
+            <div className="border-4 border-white  rounded-md">
                 {
                     isLoading ? (
                         <div className='object-cover h-[32rem] w-[32rem] flex justify-center items-center'> 

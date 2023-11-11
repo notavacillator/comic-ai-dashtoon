@@ -35,8 +35,9 @@ function App() {
         newImages[currentPage - 1] = imageUrl;
         return newImages;
       });
+      setInputText('');
 
-    }catch (error) {
+    } catch (error) {
       console.log('Fetching image failed:', error);
       setIsLoading(false); // Set isLoading to false when the image is loaded or in case of an error
     } finally {
@@ -61,7 +62,7 @@ function App() {
         <div className='w-[90%] min-h-screen mx-auto flex justify-between py-3'>
           
           {/* for Pagination */}
-          <div className='container border-4 border-black '>
+          <div className='container'>
             <Pagination
               currentPage={currentPage}
               total={10}
@@ -75,9 +76,10 @@ function App() {
 
           {/* Modern Design Search Input  */}
 
-          <div className="relative border-4 border-red-500 basis-1/3 flex flex-col justify-center">
+          <div className="relative  basis-1/3 flex flex-col justify-center">
             <textarea
               value={inputText}
+              placeholder='Enter the prompt to generate image for the page ...  '
               className="block w-11/12 h-[10rem] p-2  m-2 text-sm text-gray-900 border-2 
               outline-none border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 
               focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 
@@ -118,6 +120,7 @@ function App() {
 
               <textarea
                 value={textValue}
+                placeholder='Enter the text to show over image ... '
                 onChange={(e) => setTextValue(e.target.value)}
                 className={`mt-2 block w-full h-[10rem] p-1 text-sm text-gray-900 border-2 
                   outline-none border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 

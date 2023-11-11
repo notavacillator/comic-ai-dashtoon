@@ -27,8 +27,8 @@
     z-index: 2;
     color: #fff;
     cursor: default;
-    background-color: #5cb85c;
-    border-color: #5cb85c;
+    background-color: #196edd;
+    border-color: #196edd ;
 }
 
 .page-item.disabled .page-link,
