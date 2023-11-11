@@ -102,7 +102,8 @@ function App() {
 
   return (
     <>
-        <div className='lg:mx-9 min-h-screen mx-auto flex flex-wrap md:flex-nowrap items-center  justify-center py-3'>
+        <div className='lg:mx-9 min-h-screen mx-auto flex flex-wrap md:flex-nowrap 
+        items-center  justify-center py-3'>
           
           {/* for Pagination */}
           <div className='container'>
@@ -142,7 +143,8 @@ function App() {
                 </button>
                 <button onClick={() => setSubmitBtn(!submitBtn)}
                   className="text-white w-32 bg-blue-700 hover:bg-blue-800 
-                  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm 
+                  px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     {
                       submitBtn ? 'Hide Preview' : 'See Preview'
@@ -208,6 +210,4 @@ function App() {
 
   );
 }
-
-
 export default App;
