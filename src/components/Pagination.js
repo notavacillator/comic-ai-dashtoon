@@ -52,7 +52,6 @@ const Pagination = ({ currentPage, total, limit, onPageChange, imageArray, isLoa
                                      : null
                                 }
                                 
-                                {/* <div className="text top-left">Once upon a time</div> */}
 
                             </div>
 
@@ -62,7 +61,6 @@ const Pagination = ({ currentPage, total, limit, onPageChange, imageArray, isLoa
                                 <img src={img} alt={`filler `} 
                                     className="object-cover h-auto w-full max-h-[32rem] max-w-[32rem]  "
                                  />
-                                {/* <div className="text bottom-right">Another time ...</div> */}
 
                             </div>
 
@@ -81,7 +79,6 @@ const Pagination = ({ currentPage, total, limit, onPageChange, imageArray, isLoa
                     />
                 ))}
             </ul>
-            {/* <p>page no. {page}</p> */}
         </div>
 
     )

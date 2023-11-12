@@ -1,4 +1,6 @@
 import './App.css';
+import './components/Pagination.css'
+import './components/PaginationItem.css'  
 import { useEffect, useState } from "react";
 import Pagination from './components/Pagination'
 import { query } from './api/handle';
@@ -37,8 +39,6 @@ function App() {
       const response = await query({ "inputs": inputText });
       const imageUrl = URL.createObjectURL(response);
   
-      // setImageArray((prevImages) => [...prevImages, imageUrl]);
-      // setInputText('');
       setImageArray((prevImages) => {
         const newImages = [...prevImages];
         newImages[currentPage - 1] = imageUrl;
@@ -66,15 +66,6 @@ function App() {
 
     setTextValue('');
   }
-  useEffect(() => {
-
-    console.log(imageArray);
-    console.log(bubbleArray);
-
-    return () => {
-      // cleanup 
-    }
-  }, [imageArray, bubbleArray])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -97,7 +88,6 @@ function App() {
     });
   };
   
-  // console.log(imageArray);
   const filteredImages = imageArray.filter((image) => image !== undefined);
 
   return (
@@ -190,14 +180,30 @@ function App() {
 
         {/* preview comic section  */}
         <div className={`mx-auto flex flex-col justify-center items-center ${submitBtn ? 'my-40' : ''}`}>
-          {
-            submitBtn ?
-              filteredImages.map((imageSrc, index) => (
-                <img key={index} src={imageSrc} alt={`Fetched ${index + 1}`}  className='block border-[0.1rem] rounded my-2 max-h-[50rem] max-w-[50rem] md:w-[80%] md:h-[80%]'/>
-              ))
-              :
-              null
-          }
+            {
+              submitBtn ?
+              <>
+                <div className="relative">
+                  {filteredImages.map((imageSrc, index) => (
+                        <div key={index} className="relative">
+                        <img
+                          src={imageSrc}
+                          alt={`Fetched ${index + 1}`}
+                          className='block border-[0.1rem] rounded my-2 max-h-[50rem] max-w-[50rem] md:w-[80%] md:h-[80%]'
+                        />
+                        {bubbleArray[index] && (
+                          <div key={index} className="speech top-right">
+                            {bubbleArray[index]}
+                          </div>
+                        )}
+                      </div>
+                  ))}
+                </div>
+              </>
+                :
+                null
+                
+            }
         </div>
 
         {/* scroll to top button */}

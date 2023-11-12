@@ -1,30 +1,5 @@
-     
-      .comic {
-        display:flex;
-        flex-wrap:wrap;
-        font-family:'Comic Sans', cursive;
-        padding:1vmin;
-      }
-      
-      .panel {
-        background-color:#fff;
-        border:solid 2px #000;
-        box-shadow:0 6px 6px -6px #000;
-        display:inline-block;
-        flex:1 1;
-        height:16rem;
-        margin:1vmin;
-        overflow:hidden;
-        position:relative;
-      }
-      
-      .text {
-        background-color:#fff;
-        border:solid 2px #000;
-        margin:0;
-        padding:3px 10px;
-      }
-      
+
+
       .top-right {
         right: 1rem;
         left:70%;
@@ -76,53 +51,3 @@
         width:0;
       }
       
-      .panel:nth-child(1) {
-        flex-basis: 400px;
-      }
-      .panel:nth-child(2) {
-        flex-basis: 200px;
-      }
-      .panel:nth-child(3) {
-        flex-basis: 200px;
-      }
-      .panel:nth-child(4) {
-        flex-basis: 300px;
-      }
-      .panel:nth-child(5) {
-        flex-basis: 200px;
-      }
-      .panel:nth-child(6) {
-        flex-basis: 200px;
-      }
-      .panel:nth-child(7) {
-        flex-basis: 400px;
-      }
-      .panel:nth-child(8) {
-        flex-basis: 200px;
-      }
-      .panel:nth-child(9) {
-        flex-basis: 200px;
-        flex-grow: 1.1;
-    }
-    .panel:nth-child(10) {
-        flex-basis: 300px;
-        flex-grow: 0.3;
-      }
-      
-      /* background colours */
-      
-      .panel:nth-child(4n+1) {
-        background-image:radial-gradient(circle, yellow, orange);
-      }
-      
-      .panel:nth-child(4n+2) {
-        background-image:radial-gradient(circle, lightblue, deepskyblue);
-      }
-      
-      .panel:nth-child(4n+3) {
-        background-image:radial-gradient(circle, palegreen, yellowgreen);
-      }
-      
-      .panel:nth-child(4n+4) {
-        background-image:radial-gradient(circle, lightcoral, tomato);
-      }
